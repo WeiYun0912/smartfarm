@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #00818a !important;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
