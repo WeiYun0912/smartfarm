@@ -44,6 +44,9 @@ const HeaderBar = () => {
           <Link to="/farm/get">
             <Button color="inherit">Get</Button>
           </Link>
+          <Link to="/farm/explorer">
+            <Button color="inherit">Explorer</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

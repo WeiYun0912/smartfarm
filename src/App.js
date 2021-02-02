@@ -5,8 +5,8 @@ import HeaderBar from "./components/HeaderBar";
 import CreateCrop from "./components/CreateCrop";
 import GetCrops from "./components/GetCrops";
 import Container from "@material-ui/core/Container";
-import Card from "./components/Card";
 import Home from "./components/Home";
+import Explorer from "./components/Explorer";
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
         <Switch>
           <Route path={`/farm/create`} component={CreateCrop} />
           <Route path={`/farm/get`} component={GetCrops} />
+          <Route path={`/farm/explorer`} component={Explorer} />
         </Switch>
       </Container>
     </Router>
