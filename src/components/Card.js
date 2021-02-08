@@ -28,12 +28,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#3b956c",
     height: "40vh",
     color: "#fff",
-<<<<<<< HEAD
     transition: "1s",
-=======
-    boxShadow : "0px 2px 15px #0f1928",
-    borderRadius : "5px",
->>>>>>> d7c73769a71b8d5b482e1763abcfbaf79edf9c9c
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       margin: "15px",

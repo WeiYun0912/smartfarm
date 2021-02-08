@@ -10,11 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import WidgetsTwoToneIcon from "@material-ui/icons/WidgetsTwoTone";
-<<<<<<< HEAD
 import TxDialog from "./TxDialog";
-=======
-import BlockInfo from "./BlockInfo";
->>>>>>> d7c73769a71b8d5b482e1763abcfbaf79edf9c9c
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -57,14 +53,8 @@ const Explorer = () => {
         fromBlock: 0,
         toBlock: "latest",
       }).then((blockLog) => {
-<<<<<<< HEAD
         setBlockLog(blockLog);
         setLoading((l) => (l = false));
-=======
-        // console.log(blockLog); // same results as the optional callback above
-        setBlockLog(blockLog);
-        setLoading((l) => l = false);
->>>>>>> d7c73769a71b8d5b482e1763abcfbaf79edf9c9c
       });
     };
 
@@ -82,75 +72,76 @@ const Explorer = () => {
 
   return (
     <div>
-      
       {loading ? (
         "讀取資料中..."
       ) : (
         <>
-        <BlockInfo blockNumber={blockLog[blockLog.length-1]["blockNumber"]}/>
-        <TableContainer
-          component={Paper}
-          style={{ marginTop: "20px", width: "80%", margin: "20px auto" }}
-        >
-          <Table
-            className={classes.table}
-            size="small"
-            aria-label="simple table"
+          <BlockInfo
+            blockNumber={blockLog[blockLog.length - 1]["blockNumber"]}
+          />
+          <TableContainer
+            component={Paper}
+            style={{ marginTop: "20px", width: "80%", margin: "20px auto" }}
           >
-            <TableHead style={{ backgroundColor: "#071e3d" }}>
-              <TableRow>
-                <TableCell style={{ color: "#fff" }}>Block #</TableCell>
-                <TableCell style={{ color: "#fff" }}>Block Hash</TableCell>
-                <TableCell style={{ color: "#fff" }}>Tx Hash</TableCell>
-                <TableCell style={{ color: "#fff" }}>
-                  Contrast Address
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {blockLog.map((block) => (
-                <TableRow key={block.blockHash}>
-                  <TableCell component="th" scope="row">
-                    <Button
-                      variant="contained"
-                      className={classes.primary}
-                      startIcon={<WidgetsTwoToneIcon />}
-                    >
-                      <a
-                        href={
-                          "https://rinkeby.etherscan.io/block/" +
-                          block.blockNumber
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {block.blockNumber}
-                      </a>
-                    </Button>
+            <Table
+              className={classes.table}
+              size="small"
+              aria-label="simple table"
+            >
+              <TableHead style={{ backgroundColor: "#071e3d" }}>
+                <TableRow>
+                  <TableCell style={{ color: "#fff" }}>Block #</TableCell>
+                  <TableCell style={{ color: "#fff" }}>Block Hash</TableCell>
+                  <TableCell style={{ color: "#fff" }}>Tx Hash</TableCell>
+                  <TableCell style={{ color: "#fff" }}>
+                    Contrast Address
                   </TableCell>
-                  <TableCell>
-                    <Button variant="contained" className={classes.secondary}>
-                      {block.blockHash.substring(0, 9) + "..."}
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="outlined"
-                      className={classes.third}
-                      onClick={() => {
-                        handleClickOpen(block.transactionHash);
-                      }}
-                    >
-                      {block.transactionHash.substring(0, 9) + "..."}
-                    </Button>
-                  </TableCell>
-                  <TableCell>{block.address}</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TxDialog open={open} onClose={handleClose} txHash={txHash} />
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {blockLog.map((block) => (
+                  <TableRow key={block.blockHash}>
+                    <TableCell component="th" scope="row">
+                      <Button
+                        variant="contained"
+                        className={classes.primary}
+                        startIcon={<WidgetsTwoToneIcon />}
+                      >
+                        <a
+                          href={
+                            "https://rinkeby.etherscan.io/block/" +
+                            block.blockNumber
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {block.blockNumber}
+                        </a>
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="contained" className={classes.secondary}>
+                        {block.blockHash.substring(0, 9) + "..."}
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="outlined"
+                        className={classes.third}
+                        onClick={() => {
+                          handleClickOpen(block.transactionHash);
+                        }}
+                      >
+                        {block.transactionHash.substring(0, 9) + "..."}
+                      </Button>
+                    </TableCell>
+                    <TableCell>{block.address}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TxDialog open={open} onClose={handleClose} txHash={txHash} />
+          </TableContainer>
         </>
       )}
     </div>
