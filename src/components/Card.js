@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   card: {
+    animation: `$leftIn 1s ${theme.transitions.easing.easeInOut}`,
+    position: "relative",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -26,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#3b956c",
     height: "40vh",
     color: "#fff",
+    transition: "1s",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       margin: "15px",
@@ -34,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
   svg: {
     // margin : "1em",
     width: "150px",
+  },
+  "@keyframes leftIn": {
+    from: {
+      left: "-100%",
+    },
+    to: {
+      left: "0",
+    },
   },
 }));
 const Card = () => {

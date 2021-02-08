@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -21,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateCrop = () => {
   const classes = useStyles();
+  const formRef = useRef();
   // const [loading, setLoading] = useState(false);
-  const [txStatus, setTxStatus] = useState({loading : false , status : ""});
+  const [txStatus, setTxStatus] = useState({ loading: false, status: "" });
   const [values, changeHandler] = useForm({
     cropName: "",
     cropVarieties: "",
@@ -32,11 +33,13 @@ const CreateCrop = () => {
 
   const submitCropData = async (e) => {
     e.preventDefault();
+    console.log(formRef.current);
+    formRef.current.reset();
     let privateKey =
-    "75e1e3d26c4cb1af4472ec10b8c944abb37374608fdf2b9d7626249bf62e9195";
-    try { 
+      "75e1e3d26c4cb1af4472ec10b8c944abb37374608fdf2b9d7626249bf62e9195";
+    try {
       // setLoading(l => !l);
-      setTxStatus({loading : true , status : "pending"})
+      setTxStatus({ loading: true, status: "pending" });
       const createCrop = await Crop.methods.makeCrop(
         cropName,
         cropVarieties,
@@ -49,19 +52,26 @@ const CreateCrop = () => {
         gas: "1000000",
       };
       await signAndSendTransaction(options, privateKey);
-      setTxStatus({loading : false , status : "success"});
-      // setLoading(l => !l);
-
+      for (const prop of Object.getOwnPropertyNames(values)) {
+        values[prop] = "";
+      }
+      setTxStatus({ loading: false, status: "success" });
     } catch (error) {
       console.error(error);
-      setTxStatus({loading : false , status : "error"})
+      setTxStatus({ loading: false, status: "error" });
+      formRef.current.reset();
     }
   };
 
   const { cropName, cropVarieties, count, seedlingsSource } = values;
   return (
     <>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        ref={formRef}
+      >
         <Box
           display="flex"
           justifyContent="center"
@@ -111,7 +121,7 @@ const CreateCrop = () => {
             variant="contained"
             color="primary"
             onClick={submitCropData}
-            style={{marginBottom : "10px"}}
+            style={{ marginBottom: "10px" }}
           >
             Create Crop
           </Button>

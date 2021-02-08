@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import WidgetsTwoToneIcon from "@material-ui/icons/WidgetsTwoTone";
+import TxDialog from "./TxDialog";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -42,7 +43,9 @@ const useStyles = makeStyles({
 
 const Explorer = () => {
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
   const [blockLog, setBlockLog] = useState();
+  const [txHash, setTxHash] = useState("");
   const classes = useStyles();
   useEffect(() => {
     const getEventData = async () => {
@@ -51,15 +54,22 @@ const Explorer = () => {
         fromBlock: 0,
         toBlock: "latest",
       }).then((blockLog) => {
-        console.log(blockLog); // same results as the optional callback above
-        console.log(blockLog[0].blockHash.substring(0, 5));
         setBlockLog(blockLog);
-        setLoading((l) => !l);
+        setLoading((l) => (l = false));
       });
     };
 
     getEventData();
   }, []);
+
+  const handleClickOpen = (txHash) => {
+    setOpen(true);
+    setTxHash(txHash);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -112,17 +122,14 @@ const Explorer = () => {
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" className={classes.third}>
-                      <a
-                        href={
-                          "https://rinkeby.etherscan.io/tx/" +
-                          block.transactionHash
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {block.transactionHash.substring(0, 9) + "..."}
-                      </a>
+                    <Button
+                      variant="outlined"
+                      className={classes.third}
+                      onClick={() => {
+                        handleClickOpen(block.transactionHash);
+                      }}
+                    >
+                      {block.transactionHash.substring(0, 9) + "..."}
                     </Button>
                   </TableCell>
                   <TableCell>{block.address}</TableCell>
@@ -130,6 +137,7 @@ const Explorer = () => {
               ))}
             </TableBody>
           </Table>
+          <TxDialog open={open} onClose={handleClose} txHash={txHash} />
         </TableContainer>
       )}
     </div>
