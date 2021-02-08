@@ -10,7 +10,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import WidgetsTwoToneIcon from "@material-ui/icons/WidgetsTwoTone";
+<<<<<<< HEAD
 import TxDialog from "./TxDialog";
+=======
+import BlockInfo from "./BlockInfo";
+>>>>>>> d7c73769a71b8d5b482e1763abcfbaf79edf9c9c
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -50,12 +54,17 @@ const Explorer = () => {
   useEffect(() => {
     const getEventData = async () => {
       await Crop.getPastEvents("cropLog", {
-        // Using an array means OR: e.g. 20 or 23
         fromBlock: 0,
         toBlock: "latest",
       }).then((blockLog) => {
+<<<<<<< HEAD
         setBlockLog(blockLog);
         setLoading((l) => (l = false));
+=======
+        // console.log(blockLog); // same results as the optional callback above
+        setBlockLog(blockLog);
+        setLoading((l) => l = false);
+>>>>>>> d7c73769a71b8d5b482e1763abcfbaf79edf9c9c
       });
     };
 
@@ -73,9 +82,12 @@ const Explorer = () => {
 
   return (
     <div>
+      
       {loading ? (
         "讀取資料中..."
       ) : (
+        <>
+        <BlockInfo blockNumber={blockLog[blockLog.length-1]["blockNumber"]}/>
         <TableContainer
           component={Paper}
           style={{ marginTop: "20px", width: "80%", margin: "20px auto" }}
@@ -139,6 +151,7 @@ const Explorer = () => {
           </Table>
           <TxDialog open={open} onClose={handleClose} txHash={txHash} />
         </TableContainer>
+        </>
       )}
     </div>
   );
