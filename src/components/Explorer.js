@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import WidgetsTwoToneIcon from "@material-ui/icons/WidgetsTwoTone";
+import BlockInfo from "./BlockInfo";
 import TxDialog from "./TxDialog";
 const useStyles = makeStyles({
   table: {
