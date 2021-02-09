@@ -7,11 +7,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Crop from "../ethereum/crop-contract";
+import Crop from "../../ethereum/crop-contract";
 import SimpleDateTime  from 'react-simple-timestamp-to-date';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+    marginBottom : "10px"
   },
 });
 
@@ -23,7 +24,7 @@ const GetCrops = () => {
     const createCropData = async () => {
       const allCrop = await Crop.methods.getAllCropsData().call();
       setCrops(allCrop);
-      setLoading(l => !l);
+      setLoading(l => l = false);
     };
     createCropData();
   }, []);

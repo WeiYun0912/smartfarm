@@ -1,7 +1,6 @@
 import {useEffect,useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Crop from "../ethereum/crop-contract";
-import web3 from "../ethereum/web3";
+import web3 from "../../ethereum/web3";
 const useStyles = makeStyles((theme) => ({
     blockCardWrapper :{
         display : "flex",
@@ -26,20 +25,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const BlockInfo = ({blockNumber}) => {
+    
     const [blockInfo,setBlockInfo] = useState();
     const [loading,setLoading] = useState(true);
     useEffect(()=>{
         const tx = async () => {
+            console.log("Get Block Infomation...");
             const blockData = await web3.eth.getBlock(blockNumber);
-
-            // const getTxReceipt = await web3.eth.getTransactionReceipt("0xecf514f6f50aa0eacb1a2efa627c21c935343df01747a4e9bb031c659d715787");
-            // const hashRate = await web3.eth.getGasPrice();
-            console.log(blockData);
             setBlockInfo(blockData);
             setLoading(l => l = false);
         }
         tx();
-    },[])
+    },[blockNumber])
 
     const classes = useStyles();
     return(

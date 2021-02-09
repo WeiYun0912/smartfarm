@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./layout/Card";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     top: "20%",
   },
   titleText: {
+    animation: `$fontAni 1.5s ${theme.transitions.easing.easeInOut}`,
     color: "#fff",
     position: "relative",
     zIndex: "11",
@@ -22,15 +23,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   subTitleText: {
+    animation: `$fontAni 1.5s 1s ${theme.transitions.easing.easeInOut} forwards`,
+    
     color: "#fff",
     position: "relative",
     zIndex: "11",
+    transform : "scale(0)",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: "2rem",
     },
   },
   btn: {
+    animation: `$btnAni 1.5s 1s ${theme.transitions.easing.easeInOut} forwards`,
+    transform : "scale(0)",
     color: "#fff",
     position: "relative",
     zIndex: "11",
@@ -42,6 +48,23 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#3b956c",
     },
   },
+  "@keyframes fontAni": {
+    from: {
+      transform : "scale(0)",
+    },
+    to: {
+      transform : "scale(1)"
+    },
+  },
+  "@keyframes btnAni": {
+    from: {
+      transform : "scale(0) rotate(360deg)",
+    },
+    to: {
+      transform : "scale(1) rotate(0deg)"
+    },
+  },
+  
 }));
 const Home = () => {
   const classes = useStyles();

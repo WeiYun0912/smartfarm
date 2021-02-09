@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import SvgIcon from "../components/SvgIcon";
+import SvgIcon from "./SvgIcon";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",

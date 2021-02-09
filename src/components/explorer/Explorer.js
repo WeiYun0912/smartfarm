@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Crop from "../ethereum/crop-contract";
+import Crop from "../../ethereum/crop-contract";
 import Table from "@material-ui/core/Table";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
