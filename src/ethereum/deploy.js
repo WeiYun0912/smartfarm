@@ -2,7 +2,7 @@ const compiledCrop = require("./build/Crop.json");
 const web3 = require("./web3");
 
 const privateKey =
-  "2a9880d710304eb7992489b262b38a7ce9641a8268c6247436fdae8e451df8d8";
+  "";
 
 (async () => {
   try {
